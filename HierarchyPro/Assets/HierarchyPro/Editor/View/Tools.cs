@@ -25,17 +25,18 @@ public static class Tools
     [MenuItem("Tools/CloseSelectWindow %F1")]
     public static void closeSelectWinwo()
     {
-        Debug.Log(SceneView.lastActiveSceneView);
-        string viewName = EditorWindow.focusedWindow.titleContent.text;
-        try
-        {
-            Enum.Parse(typeof(NONEOpen), viewName);
-        }
-        catch (Exception e)
-        {
-            //SceneView.currentDrawingSceneView
-            Debug.LogWarning(e.Message);
-        }
+        EditorWindow.GetWindow<SelectWindow>().Show();
+        //Debug.Log(SceneView.lastActiveSceneView);
+        //string viewName = EditorWindow.focusedWindow.titleContent.text;
+        //try
+        //{
+        //    Enum.Parse(typeof(NONEOpen), viewName);
+        //}
+        //catch (Exception e)
+        //{
+        //    //SceneView.currentDrawingSceneView
+        //    //Debug.LogWarning(e.Message);
+        //}
         //if ((NONEOpen)Enum.Parse(typeof(NONEOpen), viewName) !=null)
         //{
         //    return;

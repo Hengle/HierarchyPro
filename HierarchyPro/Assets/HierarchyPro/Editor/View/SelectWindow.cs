@@ -28,6 +28,8 @@ public class SelectWindow : EditorWindow
 
         //Label = EditorWindow.mouseOverWindow ? EditorWindow.mouseOverWindow.ToString() : "无";
         sceneObject.Clear();
+
+
         UpdateSceneObject();
         focus = EditorGUILayout.ToggleLeft("是否开启聚焦跟随旋转", focus);
         _scroll = GUILayout.BeginScrollView(_scroll);
@@ -92,15 +94,59 @@ public class SelectWindow : EditorWindow
     {
         //GUILayoutUtility.BeginGroup();
         //EditorGUILayout.field
+        //EditorGUILayout.TextField(name, GUI.skin.button);
+
+        GUISkin darkskin = EditorGUIUtility.GetBuiltinSkin(EditorSkin.Inspector);
         
-        if (GUILayout.Button(name))
+        if (GUILayout.Button(name, "OL SelectedRow"))
         {
             if (unityAction != null)
             {
                 unityAction();
             }
-
         }
+        GUILayout.Space(40);
+    }
+    string search;
+    Vector2 scrollVector2;
+    //void OnGUI()
+    //{
+    //    GUILayout.BeginHorizontal("HelpBox");
+    //    GUILayout.Space(30);
+    //    search = EditorGUILayout.TextField("", search, "SearchTextField", GUILayout.MaxWidth(position.x / 3));
+    //    GUILayout.Label("", "SearchCancelButtonEmpty");
+    //    GUILayout.EndHorizontal();
+    //    scrollVector2 = GUILayout.BeginScrollView(scrollVector2);
+
+
+    //    GUISkin darkskin = EditorGUIUtility.GetBuiltinSkin(EditorSkin.Inspector);
+
+
+
+    //    GUILayout.EndScrollView();
+
+
+    //}
+
+    void DrawStyleItem(GUIStyle style)
+    {
+        GUILayout.BeginHorizontal("box");
+        GUILayout.Space(40);
+        EditorGUILayout.SelectableLabel(style.name);
+        GUILayout.FlexibleSpace();
+        EditorGUILayout.SelectableLabel(style.name, style);
+        GUILayout.Space(40);
+        EditorGUILayout.SelectableLabel("", style, GUILayout.Height(40), GUILayout.Width(40));
+        GUILayout.Space(50);
+        if (GUILayout.Button("复制到剪贴板"))
+        {
+            TextEditor textEditor = new TextEditor();
+            textEditor.text = style.name;
+            textEditor.OnFocus();
+            textEditor.Copy();
+        }
+        GUILayout.EndHorizontal();
+        GUILayout.Space(10);
     }
     //private void OnInspectorUpdate()
     //{
@@ -110,5 +156,8 @@ public class SelectWindow : EditorWindow
     //    }
 
     //}
+    private void OnSelectionChange()
+    {
+    }
 
 }
